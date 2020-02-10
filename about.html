@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="public/stylesheets/about.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Ignite-Synergy</title>
+    <link rel="shortcut icon" href="public/img/synergy.jpeg">
+
+<style>
+    .social
+    {
+        padding-top: 150px;
+        font-size: 100px;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Back to top button -->
+    <!-- <a style="color:black; float: right;" class="github" href="index.html">Home</a> -->
+
+
+    <style type="text/css">
+        
+        body {
+            min-height: 100vh;
+        }
+        li{
+            list-style-type: none;
+        }
+        #curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+          
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            
+            transition: 0.7s ease-in-out;
+        }
+        
+        #curtain span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            display: block;
+            transform-origin: bottom left;
+            transition: 0.5s ease-in-out;
+            transform: rotate(-90deg);
+        }
+        
+        #curtain span:nth-child(1) {
+            background: #ff1f6b;
+            transform: rotate(-90deg);
+            transition-delay: 0.2s;
+        }
+        
+        #curtain span:nth-child(2) {
+            background: #219dff;
+            transform: rotate(-90deg);
+            transition-delay: 0.1s;
+        }
+        
+        #curtain span:nth-child(3) {
+            background: #111;
+            transform: rotate(-90deg);
+            transition-delay: 0s;
+        }
+        
+        #curtain.active span:nth-child(1) {
+            z-index: 1;
+            transition-delay: 0s;
+        }
+        
+        #curtain.active span:nth-child(2) {
+            z-index: 2;
+            transition-delay: 0.1s;
+        }
+        
+        #curtain.active span:nth-child(3) {
+            z-index: 3;
+            transition-delay: 0.2s;
+        }
+        
+        #curtain.active span {
+            transform: rotate(0deg);
+        }
+        
+        .toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+        /* background-repeat: no-repeat;
+            background-position: 5px;*/
+            z-index: 1000;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        
+        
+        .navText {
+            position: absolute;
+            z-index: 100;
+            transition: 0.5s;
+            visibility: hidden;
+            opacity: 0;
+            transition-delay: 0s;
+        }
+        
+        #curtain.active ul {
+            visibility: visible;
+            opacity: 1;
+            z-index: 1200;
+            transition-delay: 0.7s;
+        }
+        
+        #curtain ul li {
+            list-style-type: none;
+            margin: 10px 0px;
+        }
+        
+        #curtain ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 2.5em;
+            text-align: center;
+            display: block;
+            font-family: consolas;
+        }
+        
+        .hamburger {
+            display: inline-block;
+            cursor: pointer;
+            position: fixed;
+            right: 50px;
+            z-index: 10 !important;
+            top: 40px;
+        }
+        
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color:black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        
+        /* Rotate first bar */
+        
+        .change .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+            transform: rotate(-45deg) translate(-9px, 6px);
+            background-color:white;
+        }
+        
+        
+        /* Fade out the second bar */
+        
+        .change .bar2 {
+            opacity: 0;
+        }
+        
+        
+        /* Rotate last bar */
+        
+        .change .bar3 {
+            -webkit-transform: rotate(45deg) translate(-8px, -8px);
+            transform: rotate(45deg) translate(-8px, -8px);
+            background-color:white;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .hamburger {
+                right: 8px;
+                top: 25px;
+            }
+            #curtain ul li a {
+                font-size:2em;
+            }
+        }
+            </style>
+        <style>
+          .h{
+            font-weight: bold;
+            font-size: 12px;
+            font-family: fantasy;
+          }
+        </style>
+        
+        
+            <div id="curtain">
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul class="navText">
+                  <li ><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About Us</a></li>
+            <li><a href="events.html" class="nav-link">Events</a></li>
+            <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+            <li><a href="coming.html" class="nav-link">Sponsors</a></li>
+            <li><a href="team.html" class="nav-link">Our Team</a></li>
+            <li><a href="winner.html" class="nav-link">Past Winners</a></li>
+            <li><a href="pass.html" class="nav-link">Get your passes</a></li>
+            <li><a href="public/ignite.pdf" class="nav-link">Brochure</a></li>
+
+                </ul>
+                <div class="hamburger toggle" onclick="toggle(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </div>
+            <script>
+                function toggle(x) {
+                    var curtain = document.getElementById('curtain');
+                    curtain.classList.toggle('active');
+                    x.classList.toggle("change");
+                    if ($('#curtain').height() == 0)
+                        $('#curtain').height('100%');
+                    else
+                        $('#curtain').height('0%');
+                }
+            </script>
+    <a id="button"><i class="fas fa-angle-up fa-2x"></i></a>
+    <div class="container-fluid">
+        <div class="tm-site-header tm-mb-1">
+            <div class="tm-site-name-container tm-bg-color-1">
+                <h1 class="tm-text-white">ABOUT US</h1>
+                
+            </div>
+            <div class="tm-nav-container tm-bg-color-8">
+                <h1 class="tm-text-white" style="color:black;">INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
+               
+            </div>
+        </div>
+        <section class="tm-mb-1" id="about">
+            <div class="tm-row tm-about-row">
+                <div class="tm-section-1-l">
+                    <img style="height:700px;" src="public/img/igdtuw.jpg" alt="About image" class="tm-img-responsive">
+                </div>
+                <article class="tm-section-1-r tm-bg-color-8">
+                    <h2 class="tm-mb-2 tm-title-color"style="font-size: 40px;">Indira Gandhi Delhi Technical University for Women</h2>
+                    <br>
+                    
+        
+                  <p>Indira Gandhi Delhi Technical University for Women (Formally known as IGIT) emerged as an independent university in May, 2013 and became the first women's technical university in India established by Govt. of Delhi. IGDTUW, located in the heart of old Delhi, is ranked 1st among Top 10 Emerging Engineering Institutes of India. At IGDTUW, we believe to emancipate women through pursuit of knowledge enabling them to gain equal status in society through realization of their rights and responsibilities.</p>
+                    
+                   
+                </article>
+            </div>
+        </section>
+        
+        <section class="tm-mb-1 tm-row tm-services-row" id="services"> 
+            <div class="tm-section-2-l">
+                <article class="tm-bg-color-6 tm-box-pad tm-mb-1">
+                    <h2 class="tm-mb-2" style="font-size: 50px;">Ignite</h2>
+                    
+                    
+                    <p>IGNITE 2020 is the second edition of the Annual Sports Meet of IGDTUW, to be held at Jawaharlal Nehru Stadium, Delhi. IGNITE is a pioneering force in the domain of all-women organized Sports Meets in Delhi. We at IGDTUW, believe that there is an unexplored niche when it comes to celebrations of sports and sportspersons, and of female involvement in sports. Our aim is to create our mark here, and to successfully organize a 2-day sports extravaganza, on the 15th-16th Feb,2020. The event will be graced by many achievers in the field of sports, as well as by teams from colleges across India. </p>
+                    <br>
+                    <br>
+                </article>
+                <!-- <div class="tm-bg-color-7 tm-em-box">
+                    <p class="tm-text-color-2">Nam iaculis, urna ut laoreet aliquam, massa magna dapibus nibh, at pellentesque lectus odio non risus. Nulla ac sodales est, vel iaculis. Text #333 . BG #DDD</p>
+                    <a href="#gallery" class="tm-btn tm-btn-2">Read More</a>
+                </div> -->
+            </div>
+            <div class="tm-section-2-r">
+                <img src="public/img/ignite.jpeg" alt="Services image" class="tm-img-responsive">
+            </div>
+        </section>
+        <section class="tm-mb-1" id="about">
+            <div class="tm-row tm-about-row">
+                <div class="tm-section-1-l">
+                    <img style="width: 700px; height: 700px;" src="public/img/synergy.jpeg" alt="About image" class="tm-img-responsive">
+                </div>
+                <article class="tm-section-1-r tm-bg-color-8">
+                    <h2 class="tm-mb-2 tm-title-color"style="font-size: 40px;">Synergy</h2>
+                    <br>
+                    
+        
+                  <p>Synergy is the Official Sports Club of IGDTUW. We at Synergy believe in inculcating the spirit of sports among women. Our teams have also participated and won many laurels in various inter college sports meets. Synergy conducts intra-college tournaments of volleyball, cricket, badminton and many more sports. We also regularly conduct events and sports challenges in the university, mainly to involve more and more women and give them the push they need to pursue sports and overcome the hesitation and stigma that is often associated with female participation in sports.</p>
+                    
+                   
+                </article>
+            </div>
+        </section>
+        
+        
+        <section id="contact" class="tm-bg-color-5 tm-mb-3">
+            <h2 class="tm-text-white tm-contact-title"> Contact Us </h2>
+            <div class="tm-bg-color-white tm-contact-main">
+                <div class="map-outer">
+                    <div class="gmap-canvas">
+                        
+                        <iframe width="100%" height="400" id="gmap-canvas"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.814936245785!2d77.2323931!3d28.665259400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd0683919c3b%3A0xf5fc331b74c2b9e2!2sIndira%20Gandhi%20Delhi%20Technical%20University%20for%20Women!5e0!3m2!1sen!2sin!4v1573654160011!5m2!1sen!2sin"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    </div>
+                </div>
+                <div class="contact-form-outer">
+                    <div class="tm-mb-4 text-center tm-social-s">
+                        <div class="social">
+                        <a href="https://www.facebook.com/igdtuwsportsclub/"><i class="fa fa-facebook-f">&nbsp&nbsp</i></a>
+                        <a href="https://www.instagram.com/ignite_igdtuw/?hl=en"><i class="fa fa-instagram">&nbsp&nbsp</i></a>
+                            </div>
+                    </div>
+                </div>
+                <div class="contact-info-outer" >
+                    <div class="tm-bg-color-6 contact-info">
+                        <p></p>
+                        
+                        <p class="tm-mb-0">Tel: <a href="tel:0100200990">Taniya: 8920342101</a></p>
+                        <p class="tm-mb-0">Tel: <a href="tel:0100200990">Ayushi: 9784630097</a></p>
+                        <p class="tm-mb-0">Tel: <a href="tel:0100200990">Anjali: 9958246433</a></p>
+                        <p class="tm-mb-0">Tel: <a href="tel:0100200990">Haripriya: 9711129631</a></p>
+                        <p>Email: <a href="mailto:synergy.igdtuw@gmail.com">synergy.igdtuw@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+       
+    </div> <!-- .container -->
+    <script src="public/js/jquery.min.js"></script> <!-- https://jquery.com/download/ -->
+    <script src="public/js/imagesloaded.pkgd.min.js"></script> <!-- https://imagesloaded.desandro.com/ -->
+    <script src="public/js/isotope.pkgd.min.js"></script> <!-- https://isotope.metafizzy.co/ -->
+    <script src="public/js/jquery.singlePageNav.min.js"></script> <!-- https://github.com/ChrisWojcik/single-page-nav -->
+    <script>
+
+        // Scroll to Top button
+        var btn = $('#button');
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
+
+        // DOM is ready
+        $(function () {
+            // Single Page Nav
+            $('#tm-nav').singlePageNav({ speed: 600 });
+
+            // Smooth Scroll (https://css-tricks.com/snippets/jquery/smooth-scrolling/)
+            $('a[href*="#"]')
+                // Remove links that don't actually link to anything
+                .not('[href="#"]')
+                .not('[href="#0"]')
+                .click(function (event) {
+                    // On-page links
+                    if (
+                        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+                        &&
+                        location.hostname == this.hostname
+                    ) {
+                        // Figure out element to scroll to
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                        // Does a scroll target exist?
+                        if (target.length) {
+                            // Only prevent default if animation is actually gonna happen
+                            event.preventDefault();
+                            $('html, body').animate({
+                                scrollTop: target.offset().top
+                            }, 600, function () {
+                                // Callback after animation
+                                // Must change focus!
+                                var $target = $(target);
+                                $target.focus();
+                                if ($target.is(":focus")) { // Checking if the target was focused
+                                    return false;
+                                } else {
+                                    $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+                                    $target.focus(); // Set focus again
+                                };
+                            });
+                        }
+                    }
+                });
+
+            /* Isotope Gallery */
+
+            // init isotope
+            var $gallery = $(".tm-gallery").isotope({
+                itemSelector: ".tm-gallery-item",
+                layoutMode: "fitRows"
+            });
+            // layout Isotope after each image loads
+            $gallery.imagesLoaded().progress(function () {
+                $gallery.isotope("layout");
+            });
+
+            $(".filters-button-group").on("click", "a", function () {
+                var filterValue = $(this).attr("data-filter");
+                $gallery.isotope({ filter: filterValue });
+            });
+
+            $(".tabgroup > div").hide();
+            $(".tabgroup > div:first-of-type").show();
+            $(".tabs a").click(function (e) {
+                e.preventDefault();
+                var $this = $(this),
+                    tabgroup = "#" + $this.parents(".tabs").data("tabgroup"),
+                    others = $this
+                        .closest("li")
+                        .siblings()
+                        .children("a"),
+                    target = $this.attr("href");
+                others.removeClass("active");
+                $this.addClass("active");
+            });
+        });
+    </script>
+</body>
+</html>

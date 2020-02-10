@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ignite-Synergy</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/stylesheets/tanya2.css" />
+    <link rel="stylesheet" type="text/css" href="public/stylesheets/tanya.css" />
+    <script>
+        document.documentElement.className = "js";
+        var supportsCssVars = function() {
+            var e, t = document.createElement("style");
+            return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e
+        };
+        supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+    </script>
+</head>
+
+<body class="demo-2 loading">
+    <svg class="hidden">
+			<symbol id="icon-arrow" viewBox="0 0 24 24">
+				<title>arrow</title>
+				<polygon points="6.3,12.8 20.9,12.8 20.9,11.2 6.3,11.2 10.2,7.2 9,6 3.1,12 9,18 10.2,16.8 "/>
+			</symbol>
+			<symbol id="icon-drop" viewBox="0 0 24 24">
+				<title>drop</title>
+				<path d="M12,21c-3.6,0-6.6-3-6.6-6.6C5.4,11,10.8,4,11.4,3.2C11.6,3.1,11.8,3,12,3s0.4,0.1,0.6,0.3c0.6,0.8,6.1,7.8,6.1,11.2C18.6,18.1,15.6,21,12,21zM12,4.8c-1.8,2.4-5.2,7.4-5.2,9.6c0,2.9,2.3,5.2,5.2,5.2s5.2-2.3,5.2-5.2C17.2,12.2,13.8,7.3,12,4.8z"/><path d="M12,18.2c-0.4,0-0.7-0.3-0.7-0.7s0.3-0.7,0.7-0.7c1.3,0,2.4-1.1,2.4-2.4c0-0.4,0.3-0.7,0.7-0.7c0.4,0,0.7,0.3,0.7,0.7C15.8,16.5,14.1,18.2,12,18.2z"/>
+			</symbol>
+        </svg>
+    <style>
+        #curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: 0.7s ease-in-out;
+        }
+        
+        #curtain span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            display: block;
+            transform-origin: bottom left;
+            transition: 0.5s ease-in-out;
+            transform: rotate(-90deg);
+        }
+        
+        #curtain span:nth-child(1) {
+            background: #ff1f6b;
+            transform: rotate(-90deg);
+            transition-delay: 0.2s;
+        }
+        
+        #curtain span:nth-child(2) {
+            background: #219dff;
+            transform: rotate(-90deg);
+            transition-delay: 0.1s;
+        }
+        
+        #curtain span:nth-child(3) {
+            background: #111;
+            transform: rotate(-90deg);
+            transition-delay: 0s;
+        }
+        
+        #curtain.active span:nth-child(1) {
+            z-index: 1;
+            transition-delay: 0s;
+        }
+        
+        #curtain.active span:nth-child(2) {
+            z-index: 2;
+            transition-delay: 0.1s;
+        }
+        
+        #curtain.active span:nth-child(3) {
+            z-index: 3;
+            transition-delay: 0.2s;
+        }
+        
+        #curtain.active span {
+            transform: rotate(0deg);
+        }
+        
+        .toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            /* background-repeat: no-repeat;
+            background-position: 5px;*/
+            z-index: 1000;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        
+        .navText {
+            position: absolute;
+            z-index: 100;
+            transition: 0.5s;
+            visibility: hidden;
+            opacity: 0;
+            transition-delay: 0s;
+        }
+        
+        #curtain.active ul {
+            visibility: visible;
+            opacity: 1;
+            z-index: 1200;
+            transition-delay: 0.7s;
+        }
+        
+        #curtain ul li {
+            list-style-type: none;
+            margin: 10px 0px;
+        }
+        
+        #curtain ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 2em;
+            text-align: center;
+            display: block;
+            font-family: 'consolas';
+        }
+        
+        .hamburger {
+            display: inline-block;
+            cursor: pointer;
+            position: fixed;
+            right: 50px;
+            z-index: 10 !important;
+            top: 40px;
+        }
+        
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        /* Rotate first bar */
+        
+        .change .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+            transform: rotate(-45deg) translate(-9px, 6px);
+             background-color: white;
+        }
+        /* Fade out the second bar */
+        
+        .change .bar2 {
+            opacity: 0;
+            background-color: white;
+        }
+        /* Rotate last bar */
+        
+        .change .bar3 {
+            -webkit-transform: rotate(45deg) translate(-8px, -8px);
+            transform: rotate(45deg) translate(-8px, -8px);
+            background-color: white;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .hamburger {
+                right: 8px;
+                top: 25px;
+            }
+            #curtain ul li a {
+                font-size: 2em;
+            }
+        }
+        .register_link:hover{
+            color:black;            
+        }
+        .content--fixed{
+            padding:0px;
+        }
+    </style>
+    <div id="curtain">
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul class="navText">
+            <li><a href="index.html" class="">Home</a></li>
+            <li><a href="about.html" class="">About Us</a></li>
+            <li><a href="events.html" class="">Events</a></li>
+            <li><a href="gallery.html" class="">Gallery</a></li>
+            <li><a href="coming.html" class="">Sponsors</a></li>
+            <li><a href="team.html" class="">Our Team</a></li>
+            <li><a href="winner.html" class="">Past Winners</a></li>
+            <li><a href="pass.html" class="">Get your passes</a></li>
+            <li><a href="public/ignite.pdf" class="">Brochure</a></li>
+
+
+        </ul>
+        <div class="hamburger toggle" onclick="toggle(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </div>
+    <script>
+        function toggle(x) {
+            var curtain = document.getElementById('curtain');
+            curtain.classList.toggle('active');
+            x.classList.toggle("change");
+            if ($('#curtain').height() == 0)
+                $('#curtain').height('100%');
+            else
+                $('#curtain').height('0%');
+        }
+    </script>
+
+    <main>
+
+        <div class="content content--fixed">
+
+            <button style="font-size:40px;" class="menu-trigger" style="">+ Events</button>
+        </div>
+        <div id="content-1" class="content content--switch content--switch-current" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSAGY7uxcaaJgnQTaMuAEz66N_O3rIJo86RJuDij7YS7iqtvLl8');background-position: center;background-size: cover;background-attachment: fixed;">
+            <h2 class="content__title">EVENTS</h2>
+            <div style="font-size:25px;" class="content__subtitle">IGNITE 2020</div>
+        </div>
+        <div id="content-2" class="content content--switch" style="background-color: #f6fba2;
+        background-image: linear-gradient(315deg, #f6fba2 0%, #20ded3 74%);">
+            <h2 class="content__title">TABLE TENNIS</h2>
+            <div class="content__subtitle">
+               <pre> CONTACT: Yogita - 8929211738 <br> <a href="myform.php?event=tennis" class="register_link">REGISTER</a></pre>
+                <ul>
+                    <li> Only individual entries are allowed</li>
+                    <li>Latest IITF rules will be followed in the tournament</li>
+                    <li>The tournament will be a league cum knock-out tournament</li>
+                    <li>Matches will be played only in SINGLES format according to the fixtures prepard by the organising committee. The committee shall, however, have the right to notify any subsequent changes due to unforeseen circumstances</li>
+                    <li>Upto the semifinals, a match will consist of a set of 3 games, each containing 11 points</li>
+                    <li>The final will consist of a set of 5 games, each consisting of 11 points</li>
+                    <li>Players are requested to bring their own racquets. Balls will be provided by the tournament committee</li>
+                    <li>Players should be present 30 minutes prior to their matches</li>
+                    <li>Any sort of misbehaviour will not be tolerated. Doing so will result in immediate disqualification.</li>
+
+                </ul>
+            </div>
+        </div>
+        <div id="content-3" class="content content--switch" style="background-color: #f6d327;
+        background-image: linear-gradient(315deg, #f6d327 0%, #de4daa 74%);">
+            <h2 class="content__title">BASKETBALL</h2>
+            <div class="content__subtitle">
+                <pre>CONTACT: Anjali - 9958246433 <br> Ragini - 7840010852 <a href="myform.php?event=basketball" class="register_link">REGISTER</a></pre>
+                <ul>
+
+                    <li>All universities and colleges are eligible for participating in the tournament.</li>
+                    <li>All rules and regulations will apply in the conduct of tournament as per FIBA & BFI.</li>
+                    <li> All the matches shall be played according to the fixtures prepared by the tournament committee. The committee shall, however, have the right to notify any subsequent change due to special unforeseen circumstances</li>
+                    <li>All teams should be in proper kit.</li>
+                    <li>Each player has to bring College ID & Government ID card for verification purposes</li>
+                    <li>Each team will constitute of 12 players accompanied by a candidate leader.</li>
+                    <li>Referee’s decision shall be the final and binding.</li>
+                    <li> Entries once submitted will not be changed under any university/college.</li>
+                    <li>The teams should be present 30 minutes before their matches failing which walkover shall be given in favor of opponents.</li>
+                    <li>The tournament is solely for the promotion of the sport. Any kind of misbehavior will not be tolerated. Doing so will result in immediate disqualification.</li>
+                    <li>There will be cash prizes, medals and certificates only for winners and runners up.</li>
+                </ul>
+            </div>
+        </div>
+        <div id="content-4" class="content content--switch" style="background-color: #eec0c6;
+        background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
+        ">
+            <h2 class="content__title">ATHLETICS</h2>
+            <div class="content__subtitle">
+                <pre>CONTACT: Shubhika - 9870503321  <br>   <a href="myform.php?event=athletics" class="register_link">REGISTER</a></pre>
+                <ul>
+                    <li>100m 200m 400m 800m</li>
+                    <li>1500m 4x100m Relay</li>
+                    <li>4x400m Relay Long Jump Shot Put</li>
+                    <li>Athletics includes the following events :</li>
+                    <li>Heats for the short distance races (100m, 200m and 400m) will be conducted on the basis of number of participants</li>
+                    <li>All other races will be time trials, i.e. the final standings will be based on the best timings</li>
+                    <li>All races should be started with a proper sitting start with only one foul start permitted. A second foul start will result in automatic elimination from the event</li>
+                    <li>In every field event, each participant will get 3 trials, of which the best will be considered for overall standings</li>
+                    <li>Maximum of 2 participants from each college in any individual event are allowed</li>
+                    <li>An individual can participate in a maximum of 3 individual events (excluding relays). Inability to follow these rules may result in cancellation of event(s)</li>
+                    <li>In case of any conflict, referee's decision will be final.</li>
+                </ul>
+            </div>
+        </div>
+        <style>
+
+        </style>
+        <div id="content-5" class="content content--switch" style="background-color: #eec0c6;
+        background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);">
+            <h2 class="content__title">VOLLEYBALL</h2>
+            <div class="content__subtitle">
+                <pre>CONTACT: Nisha - 7357484929 <br>  <a href="myform.php?event=volley" class="register_link">REGISTER</a></pre>
+                <div class="tanya">
+                    <ul>
+                        <li>6 players on the floor at any one time - 3 in the front row and 3 in the back row</li>
+						<li>Maximum of 3 hits per side</li>
+						<li>Points are made on every serve for winning team of rally(rally-point scoring)</li>
+					    <li>Player may not hit the ball twice in succession(A block is not considered a hit)</li>
+				        <li>Ball may be played off the net during a volley and on a serve</li>
+						<li>A ball hitting a boundary line is in</li>
+					    <li>A ball is out if it hits an antennae, the floor completely outside the court, any of the net or cables outside the antennae,the referee stand or pole, the ceiling above a non-playable area</li>
+						<li>It is legal to contact the ball with any part of a player’s body</li>
+						<li> It is illegal to catch, hold or throw the ball</li>
+						<li>A player cannot block or attack a serve from on or inside the 10-foot line</li>
+						<li>After the serve, front-line players may switch positions at the net</li>
+						<li>Matches are made up of sets; the number depends on level of play.3-set matches are 2 sets to 25 points and a third set to 15. Each set must be won by two points. The winner is the first team to win 2 sets</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content-6" class="content content--switch" style="background-color: #5de6de;
+        background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);">
+            <h2 class="content__title">BADMINTON</h2>
+            <div class="content__subtitle">
+                <pre>CONTACT: Niyati - 9868217212 <a href="myform.php?event=badminton" class="register_link">REGISTER</a></pre>
+                <ul>
+                    <li>Number of players representing any college/university must be a minimum of 2 members and a maximum of 4 members</li>
+                    <li>Order of events shall be as follows : Singles / Doubles / Singles</li>
+                    <li>For the league matches, each match will consist of one game of 30 points</li>
+                    <li>For the knock out matches, each match will consist of a set of 3 games of 21 points each</li>
+                    <li>Maximum 2 members of the team can be repeated</li>
+                    <li>Team line up must be submitted before the match. Any request to change the line up won't be accepted after submission</li>
+                    <li>Latest BWF rules will be followed</li>
+                    <li>Players must wear neat and clean non-marking shoes with red sole</li>
+                    <li>Any new rule, or a change in rules will be informed to the teams prior to the beginning of the match. In any case, the decision of the referee and the officials shall be considered final</li>
+                    <li>In case of any discrepancy, the decision of the referee shall be considered final</li>
+                    <li>Each player has to bring college ID and government ID card for verification purposes</li>
+                </ul>
+            </div>
+        </div>
+        <nav class="grim">
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--1"></div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--2"></div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--3"></div>
+                <div class="grim__item-content">
+                    <div class="grim__item-inner">
+                        <button class="menu-trigger menu-trigger--close">- close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--4"></div>
+                <a href="#content-1" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title"></h3>
+                    </div>
+                </a>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--5"></div>
+                <a href="#content-1" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title">Home</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--6"></div>
+                <div class="grim__item-img grim__item-img--1" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGbhvjqWRvoWWRoLYa7jS8Wdo3wXbXOzvepIdhyJNGLO_F1Ex1');background-size: cover;;background-position: center;"></div>
+                <a href="#content-2" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title">TABLE TENNIS</h3>
+                        <!--<span class="grim__item-desc">Champions keep playing until they get it right</span>-->
+                    </div>
+                </a>
+                <div class="grim__item-bg grim__item-bg-cover grim__item-bg--6"></div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--7"></div>
+                <div class="grim__item-img grim__item-img--2" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREqBbDUfA4m2Rhui3XxBtoOqvmwmnxq0Td3DK-_zwNv7RSSvBy');background-size: cover;;background-position: center;"></div>
+                <a href="#content-3" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title">BASKETBALL</h3>
+                        <!--<span class="grim__item-desc">You were born to be a player. </span>-->
+                    </div>
+                </a>
+                <div class="grim__item-bg grim__item-bg-cover grim__item-bg--7"></div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--8"></div>
+                <div class="grim__item-img grim__item-img--3" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQS6Yn5BkuMseY2au8wH24QpuJ5N7c0yUb7fLWfNyzXiTh409uV');background-size: cover;;background-position: center;"></div>
+                <a href="#content-4" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title">ATHLETICS</h3>
+                        <!--<span class="grim__item-desc">The harder the battle, the sweeter the victory</span>-->
+                    </div>
+                </a>
+                <div class="grim__item-bg grim__item-bg-cover grim__item-bg--8"></div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--9"></div>
+                <div class="grim__item-img grim__item-img--4" style="background-image: url('public/img/voll.jpg');background-size: cover;background-position: center;"></div>
+                <a href="#content-5" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title">VOLLEYBALL</h3>
+                        <!--<span class="grim__item-desc">It's not whether you get knocked down,it's whether you get up</span>-->
+                    </div>
+                </a>
+                <div class="grim__item-bg grim__item-bg-cover grim__item-bg--9"></div>
+            </div>
+            <div class="grim__item">
+                <div class="grim__item-bg grim__item-bg--10"></div>
+                <div class="grim__item-img grim__item-img--5" style="background-image: url('https://i.pinimg.com/originals/cf/d6/3f/cfd63f9ee399a5927e6f5513bbc24221.jpg');background-size: cover;"></div>
+                <a href="#content-6" class="grim__link grim__item-content">
+                    <div class="grim__item-inner">
+                        <h3 class="grim__item-title">BADMINTON</h3>
+                        <!--<span class="grim__item-desc">Persistence can change failure into extraordinary achievement</span>-->
+                    </div>
+                </a>
+                <div class="grim__item-bg grim__item-bg-cover grim__item-bg--10"></div>
+            </div>
+        </nav>
+    </main>
+    <script src="public/js/tanya1.js"></script>
+    <script src="public/js/tanya2.js"></script>
+    <script src="public/js/tanya3.js"></script>
+    <script src="public/js/tanya4.js"></script>
+</body>
+
+</html>

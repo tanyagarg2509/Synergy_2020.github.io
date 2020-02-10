@@ -1,0 +1,119 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Modal Home */
+
+.modal-guess,
+.modal-guess * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.modal-guess {
+    --primary-color: #C50B2F;
+    font-family: Helvetica, Arial, sans-serif;
+    position: fixed;
+    background: rgba(0, 0, 0, .5);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999999;
+    /*text-transform: uppercase;*/
+    letter-spacing: 2px;
+}
+
+.modal-guess__inner {
+    /*max-width: 600px;*/
+    width:100%;
+    background: url('../public/img/1.jpg');
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 3px;
+    height: 100%;
+    background: cover;
+}
+
+.modal-guess__inner-border {
+    border: 1px solid rgba(255, 255, 255, .8);
+    height: 90%;
+    width: 80%;
+    margin:2em auto 2em auto;
+    background: #000000bf;
+
+}
+
+.modal-guess__top {
+    text-align: right;
+    padding-top: 10px;
+    /*padding-bottom: 35px;*/
+}
+
+#modal-guess__close {
+    font-size: 18px;
+    cursor: pointer;
+    /*padding: 20px;*/
+    margin-right: 14px;
+}
+
+.modal-guess__middle {
+    padding: 0px 50px 20px 50px;
+}
+
+.modal-guess__title {
+    color: #deea27;
+    /*color: #c9ec54;*/
+    font-weight: bolder;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1400 - 300)));
+    font-family: monospace;
+    margin-bottom: 20px;
+}
+
+
+.modal-guess__text {
+    color:lavenderblush;
+    line-height: 1.3;
+    font-size: calc(14px + (22 - 14) * ((100vw - 300px) / (1400 - 300)));
+    font-family: auto;
+}
+.event-name{
+font-size: calc(18px + (22 - 18) * ((100vw - 300px) / (1400 - 300)));
+}
+.note{
+    font-size:small;
+}
+@media (max-width:556px) {
+    .modal-guess__inner {
+        margin: 0 10px;
+    }
+
+    .modal-guess__middle {
+        padding: 0px 5px 10px 5px;
+    }
+    .modal-guess__title {
+        font-size: 2.0em;
+    }
+    #sub-title{
+        font-size: 1.5em;
+    }
+    .modal-guess__text {
+        font-size: 0.8em;
+    }
+    .event-name{
+        font-size: 1.2em;
+    }
+    #student-detail-phone{
+        text-align: left;
+    }
+    .note{
+    font-size:x-small;
+    }
+}
